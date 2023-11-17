@@ -14,7 +14,7 @@ def HandleHello(self, data):
 
     toSend.set("PacketData", "domainPartition.domain", "eagames")
     toSend.set("PacketData", "messengerIp", readFromConfig("connection", "emulator_ip"))
-    toSend.set("PacketData", "messengerPort", 0)  # Unknown data are being send to this port
+    toSend.set("PacketData", "messengerPort", readFromConfig("connection", "messenger_server_port"))  # Unknown data are being send to this port
     toSend.set("PacketData", "domainPartition.subDomain", "NFS-2007")
     toSend.set("PacketData", "TXN", "Hello")
     toSend.set("PacketData", "activityTimeoutSecs", 0)  # We could let idle clients disconnect here automatically?

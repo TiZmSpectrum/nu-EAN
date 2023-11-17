@@ -50,7 +50,7 @@ def MainApp():
         sys.exit(3)
 
     try:
-        SSLContext = ssl.DefaultOpenSSLContextFactory(ssl_key, ssl_cert)
+        ##SSLContext = ssl.DefaultOpenSSLContextFactory(ssl_key, ssl_cert)
         Log("Init", "\033[37m").new_message("Successfully created SSL Context!", 2)
     except Exception as SSLErr:
         Log("Init", "\033[37;41m").new_message("Fatal Error!\n"
@@ -65,7 +65,7 @@ def MainApp():
     try:
         factory = Factory()
         factory.protocol = PlasmaClient.HANDLER
-        reactor.listenSSL(plasma_client_port, factory, SSLContext)
+        reactor.listenTCP(plasma_client_port, factory)
         Log("PlasmaClient", "\033[33;1m").new_message("Created TCP Socket (now listening on port " + str(plasma_client_port) + ")", 1)
     except Exception as BindError:
         Log("Init", "\033[33;1;41m").new_message("Fatal Error! Cannot bind socket to port: " + str(plasma_client_port) + "\n"
@@ -76,7 +76,7 @@ def MainApp():
     try:
         factory = Factory()
         factory.protocol = PlasmaServer.HANDLER
-        reactor.listenSSL(plasma_server_port, factory, SSLContext)
+        reactor.listenTCP(plasma_server_port, factory)
         Log("PlasmaServer", "\033[32;1m").new_message("Created TCP Socket (now listening on port " + str(plasma_server_port) + ")", 1)
     except Exception as BindError:
         Log("Init", "\033[33;1;41m").new_message("Fatal Error! Cannot bind socket to port: " + str(plasma_server_port) + "\n"
@@ -109,7 +109,8 @@ def MainApp():
                                                  "Make sure that this port aren't used by another program!\n\n"
                                                  "Additional error info:\n" + str(BindError), 0)
         sys.exit(5)
-		
+	Log("Test", "test")
+    
     try:
         factoryTCP = Factory()
         factoryTCP.protocol = MessengerServer.TCPHandler
@@ -122,6 +123,7 @@ def MainApp():
                                                  "Make sure that this port aren't used by another program!\n\n"
                                                  "Additional error info:\n" + str(BindError), 0)
         sys.exit(5)
+    
     try:
         site = Site(WebServer.Handler())
         reactor.listenTCP(http_server_port, site)

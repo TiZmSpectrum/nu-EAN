@@ -15,7 +15,8 @@ def ReceiveRequest(self, data):
     if self.CONNOBJ is None:
         self.transport.loseConnection()
     else:
-        toSend.set("PacketData", "TID", str(data.get("PacketData", "TID")))
-        toSend.set("PacketData", "NAME", self.CONNOBJ.personaName)
+        #toSend.set("PacketData", "TID", str(data.get("PacketData", "TID")))
+        #toSend.set("PacketData", "NAME", self.CONNOBJ.personaName)
+        #toSend.set("PacketData", "NAME", "IamLupo\n")
 
         Packet(toSend).send(self, "USER", 0x00000000, 0)

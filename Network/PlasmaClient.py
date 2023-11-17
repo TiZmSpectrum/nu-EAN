@@ -89,6 +89,10 @@ class HANDLER(Protocol):
                 recp.ReceivePacket(self, dataObj, TXN)
             elif packet_type == 'pnow':
                 pnow.ReceivePacket(self, dataObj, TXN)
+            elif packet_type == 'club':
+                club.ReceivePacket(self, dataObj, TXN)
+            elif packet_type == 'lddr':
+                lddr.ReceivePacket(self, dataObj, TXN)
             else:
                 self.logger_err.new_message(
                     "[" + self.ip + ":" + str(self.port) + ']<-- Got unknown message type (' + packet_type + ")", 2)

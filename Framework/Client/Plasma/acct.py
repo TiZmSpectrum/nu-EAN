@@ -136,17 +136,18 @@ def CheckUserAlreadyLoggedIn(userID):
 			return user
 	return 0
 
-def HandleNuLogin(self, data):
+def HandleXBL360Login(self, data):
     """ User is logging in with email and password """
 
     toSend = Packet().create()
     toSend.set("PacketData", "TXN", "Login")
 
-    returnEncryptedInfo = int(data.get("PacketData", "returnEncryptedInfo"))  # If 1 - User wants to store login information
+    #returnEncryptedInfo = int(data.get("PacketData", "returnEncryptedInfo"))  # If 1 - User wants to store login information
 
-    try:
-        name = data.get('PacketData', "name")
-        password = data.get('PacketData', "password")
+    #try:
+    name = data.get('PacketData', "xuid")
+    password = data.get('PacketData', "macAddr")
+    """
     except:
         encryptedInfo = data.get("PacketData", "encryptedInfo")
 
@@ -157,8 +158,10 @@ def HandleNuLogin(self, data):
 
         name = loginData[0]
         password = loginData[1]
+    """
 
-    loginData = db.loginUser(name, password)
+    ##loginData = db.loginUser(name, password)
+    loginData = {'UserID': 1337, 'SessionID': "Loool"}
 
     if loginData['UserID'] > 0:  # Got UserID - Login Successful
         self.CONNOBJ.accountSessionKey = loginData['SessionID']
@@ -182,6 +185,7 @@ def HandleNuLogin(self, data):
         toSend.set("PacketData", "lkey", loginData['SessionID'])
         toSend.set("PacketData", "name", name)
 
+        """
         if returnEncryptedInfo == 1:
             encryptedLoginData = "Ciyvab0tregdVsBtboIpeChe4G6uzC1v5_-SIxmvSL" + b64encode(name + "\f" + password)
             if encryptedLoginData.find('==') != -1:
@@ -190,7 +194,7 @@ def HandleNuLogin(self, data):
                 encryptedLoginData = encryptedLoginData.replace("=", '-')
 
             toSend.set("PacketData", "encryptedLoginInfo", encryptedLoginData)
-
+        """
         toSend.set("PacketData", "profileId", str(loginData['UserID']))
         toSend.set("PacketData", "userId", str(loginData['UserID']))
 
@@ -219,6 +223,11 @@ def HandleNuLogin(self, data):
         self.logger_err.new_message("[Persona] User " + self.CONNOBJ.name + " wanted to login as " + name + " but this persona cannot be found!", 1)
     Packet(toSend).send(self, "acct", 0x80000000, self.CONNOBJ.plasmaPacketID)
 
+def HandleXBL360UpdateAccount(self, data):
+    toSend = Packet().create()
+    toSend.set("PacketData", "TXN", "XBL360UpdateAccount")
+
+    Packet(toSend).send(self, "acct", 0x80000000, self.CONNOBJ.plasmaPacketID)
 
 def HandleNuGetPersonas(self):
     """ Get personas associated with account """
@@ -441,6 +450,11 @@ def HandleNuLookupUserInfo(self, data):
 
     Packet(toSend).send(self, "acct", 0x80000000, self.CONNOBJ.plasmaPacketID)
 
+def HandleGetUserIdsByXuids(self, data):
+    toSend = Packet().create()
+    toSend.set("PacketData", "TXN", "GetUserIdsByXuids")
+
+    Packet(toSend).send(self, "acct", 0x80000000, self.CONNOBJ.plasmaPacketID)
 
 def ReceivePacket(self, data, txn):
     if txn == 'GetCountryList':
@@ -449,8 +463,10 @@ def ReceivePacket(self, data, txn):
         HandleNuGetTos(self)
     elif txn == 'AddAccount':
         HandleNuAddAccount(self, data)
-    elif txn == 'Login':
-        HandleNuLogin(self, data)
+    elif txn == 'XBL360Login':
+        HandleXBL360Login(self, data)
+    elif txn == 'XBL360UpdateAccount':
+        HandleXBL360UpdateAccount(self, data)
     elif txn == 'NuGetPersonas':
         HandleNuGetPersonas(self)
     elif txn == 'NuLoginPersona':
@@ -469,6 +485,8 @@ def ReceivePacket(self, data, txn):
         HandleGetLockerURL(self)
     elif txn == 'NuLookupUserInfo':
         HandleNuLookupUserInfo(self, data)
+    elif txn == 'GetUserIdsByXuids':
+        HandleGetUserIdsByXuids(self, data)
     else:
         self.logger_err.new_message(
             "[" + self.ip + ":" + str(self.port) + ']<-- Got unknown acct message (' + txn + ")", 2)

@@ -15,6 +15,11 @@ class Handler(Resource):
 
         logger.new_message("Got HTTP GET request: " + uri, 2)
 
+        if uri == "/gamescripts/bfmc/xb360/en/XBLnews_en_US.txt":
+            with open('Data/XBLnews_en_US.txt', 'r') as txt:
+                request.setHeader("Content-Type", "application/text")
+                return txt.read()
+
         if uri == "/easo/editorial/BF/2010/BFBC2/config/PC/game.xml":
             with open('Data/game.xml', 'r') as gamexml:
                 request.setHeader("Content-Type", "application/xml")

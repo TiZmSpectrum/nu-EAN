@@ -104,13 +104,22 @@ def HandleStart(self, data): # TODO - Add PlayNow matchmaking handling here... C
     self.CONNOBJ.serverData.set("ServerData", "B-U-help_type", "0")
 
     Packet(toSend).send(self, "pnow", 0x80000000, 0)
-    
+
+def HandleCancel(self):
+    toSend = Packet().create()
+    toSend.set("PacketData", "TXN", "Cancel")
+
+    Packet(toSend).send(self, "pnow", 0x80000000, 0)
+
 
 def ReceivePacket(self, data, txn):
     if txn == 'Start':
         HandleStart(self, data)
     elif txn == 'Status':
         HandleStatus(self)
+    elif txn == 'Cancel':
+        HandleCancel(self)
+    
    # elif txn == 'Ping':
    #     HandlePing(self)
    # elif txn == 'Goodbye':
