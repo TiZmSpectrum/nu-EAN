@@ -1,31 +1,16 @@
-#! python2.7
+#! python3
 
+import socket
+import ssl
 import sys
 import threading
-
-from Config import readFromConfig
-from Database import Database
-from Network import *
-from Logger import Log
-
-Log(None, None).clean_log()
-
-try:
-    from twisted.internet import ssl, reactor
-    from twisted.internet.protocol import Factory, Protocol
-    from twisted.web.server import Site
-    from OpenSSL import SSL
-except ImportError as importErr:
-    Log("Init", "\033[37;41m").new_message("Fatal Error!\n"
-                                           "Cannot import Twisted modules!\n"
-                                           "Please install all required dependencies using\n"
-                                           "`pip install -r requirements.txt`\n\n"
-                                           "Additional error info:\n" + str(importErr), 0)
-    sys.exit(1)
+import configparser
+import databases
+import logger
 
 
 def MainApp():
-    Log("Init", "\033[37m").new_message("Initializing Battlefield: Bad Company 2 Master Server Emulator...", 0)
+    logger("Init", "\033[37m").new_message("Initializing EA Nation 1.0 Emulator...", 0)
 
     try:
         ssl_key = readFromConfig("SSL", "priv_key_path")
@@ -109,8 +94,7 @@ def MainApp():
                                                  "Make sure that this port aren't used by another program!\n\n"
                                                  "Additional error info:\n" + str(BindError), 0)
         sys.exit(5)
-	Log("Test", "test")
-    
+
     try:
         factoryTCP = Factory()
         factoryTCP.protocol = MessengerServer.TCPHandler
