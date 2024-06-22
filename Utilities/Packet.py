@@ -1,4 +1,4 @@
-from ConfigParser import ConfigParser
+from backports import configparser
 from base64 import b64encode
 from struct import pack, unpack
 
