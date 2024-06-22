@@ -172,11 +172,11 @@ def HandleNuLogin(self, data):
         if useridx != 0:
             useridx.sessionKey = loginData['SessionID']
         else:
-		    globalUsers.append(ServerUser())
-		    globalUsers[globalUserCount].Username = name
-		    globalUsers[globalUserCount].UserID = int(loginData['UserID'])
-		    globalUsers[globalUserCount].sessionKey = loginData['SessionID']
-		    globalUserCount += 1
+            globalUsers.append(ServerUser())
+            globalUsers[globalUserCount].Username = name
+            globalUsers[globalUserCount].UserID = int(loginData['UserID'])
+            globalUsers[globalUserCount].sessionKey = loginData['SessionID']
+            globalUserCount += 1
             
        # print("Session key is:" +globalUsers[0].sessionKey)
         toSend.set("PacketData", "lkey", loginData['SessionID'])
