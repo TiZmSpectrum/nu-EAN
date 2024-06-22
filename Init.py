@@ -18,7 +18,7 @@ try:
     from twisted.web.server import Site
     from OpenSSL import SSL
 
-    logger.warning("Starting nu-EAN, an EA Nation 1.0 server emulator...\n")
+    Log("Init", "\033[37m").new_message("Starting nu-EAN, an EA Nation 1.0 server emulator...\n")
 
     def mainapp():
         try:
