@@ -29,10 +29,11 @@ try:
             theater_server_port = int(readFromConfig("connection", "theater_server_port"))
             messenger_server_port = int(readFromConfig("connection", "messenger_server_port"))
             http_server_port = int(readFromConfig("connection", "http_server_port"))
-        except:
+        except Exception as ConfigError:
             logger.error("Fatal Error!\n"
                 "Failed to load certain values in the config.ini, be sure that EVERY \n"
-                "option has a valid value and try it again.")
+                "option has a valid value and try it again.\n\n"
+                "Additional error info:\n" + str(ConfigError))
             sys.exit(2)
 
         try:
