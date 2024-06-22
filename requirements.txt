@@ -5,3 +5,4 @@ pyOpenSSL
 cffi
 cryptography
 service_identity
+configparser
