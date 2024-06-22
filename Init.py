@@ -64,7 +64,7 @@ try:
             Log("PlasmaClient", "\033[33;1m").new_message("Created TCP Socket (now listening on port " + str(plasma_client_port) + ")", 1)
         except Exception as BindError:
             Log("Init", "\033[33;1;41m").new_message("Fatal Error! Cannot bind socket to port: " + str(plasma_client_port) + "\n"
-                                                 "Make sure that this port aren't used by another program!\n\n"
+                                                 "Make sure that this port isn't used by another program!\n\n"
                                                  "Additional error info:\n" + str(BindError), 0)
             sys.exit(5)
 
@@ -75,7 +75,7 @@ try:
             Log("PlasmaServer", "\033[32;1m").new_message("Created TCP Socket (now listening on port " + str(plasma_server_port) + ")", 1)
         except Exception as BindError:
             Log("Init", "\033[33;1;41m").new_message("Fatal Error! Cannot bind socket to port: " + str(plasma_server_port) + "\n"
-                                                 "Make sure that this port aren't used by another program!\n\n"
+                                                 "Make sure that this port isn't used by another program!\n\n"
                                                  "Additional error info:\n" + str(BindError), 0)
             sys.exit(5)
 
@@ -88,7 +88,7 @@ try:
             Log("TheaterClient", "\033[35;1m").new_message("Created UDP Socket (now listening on port " + str(theater_client_port) + ")", 1)
         except Exception as BindError:
             Log("Init", "\033[35;1;41m").new_message("Fatal Error! Cannot bind socket to port: " + str(theater_client_port) + "\n"
-                                                 "Make sure that this port aren't used by another program!\n\n"
+                                                 "Make sure that this port isn't used by another program!\n\n"
                                                  "Additional error info:\n" + str(BindError), 0)
             sys.exit(5)
 
@@ -101,7 +101,7 @@ try:
             Log("TheaterServer", "\033[36;21m").new_message("Created UDP Socket (now listening on port " + str(theater_server_port) + ")", 1)
         except Exception as BindError:
             Log("Init", "\033[35;1;41m").new_message("Fatal Error! Cannot bind socket to port: " + str(theater_server_port) + "\n"
-                                                 "Make sure that this port aren't used by another program!\n\n"
+                                                 "Make sure that this port isn't used by another program!\n\n"
                                                  "Additional error info:\n" + str(BindError), 0)
             sys.exit(5)
 		
@@ -114,7 +114,7 @@ try:
             Log("MessengerServer", "\033[36;1m").new_message("Created UDP Socket (now listening on port " + str(messenger_server_port) + ")", 1)
         except Exception as BindError:
             Log("Init", "\033[35;1;41m").new_message("Fatal Error! Cannot bind socket to port: " + str(messenger_server_port) + "\n"
-                                                 "Make sure that this port aren't used by another program!\n\n"
+                                                 "Make sure that this port isn't used by another program!\n\n"
                                                  "Additional error info:\n" + str(BindError), 0)
             sys.exit(5)
         try:
@@ -123,7 +123,7 @@ try:
             Log("WebServer", "\033[36m").new_message("Created TCP Socket (now listening on port " + str(http_server_port) + ")", 1)
         except Exception as BindError:
             Log("Init", "\033[35;1;41m").new_message("Fatal Error! Cannot bind socket to port: " + str(http_server_port) + "\n"
-                                                 "Make sure that this port aren't used by another program!\n\n"
+                                                 "Make sure that this port isn't used by another program!\n\n"
                                                  "Additional error info:\n" + str(BindError), 0)
             sys.exit(5)
 
