@@ -1,31 +1,25 @@
-#! python2.7
+#! python3
 
+
+import stdin
 import sys
+import os
 import threading
+import config
+import sqlite3
+import logging
 
-from Config import readFromConfig
-from Database import Database
-from Network import *
-from Logger import Log
-
-Log(None, None).clean_log()
 
 try:
     from twisted.internet import ssl, reactor
     from twisted.internet.protocol import Factory, Protocol
     from twisted.web.server import Site
     from OpenSSL import SSL
-except ImportError as importErr:
-    Log("Init", "\033[37;41m").new_message("Fatal Error!\n"
-                                           "Cannot import Twisted modules!\n"
-                                           "Please install all required dependencies using\n"
-                                           "`pip install -r requirements.txt`\n\n"
-                                           "Additional error info:\n" + str(importErr), 0)
-    sys.exit(1)
 
 
-def MainApp():
-    Log("Init", "\033[37m").new_message("Initializing Battlefield: Bad Company 2 Master Server Emulator...", 0)
+def mainapp():
+    logging.warning('Starting up EA Nation 1.0 Emulator')
+
 
     try:
         ssl_key = readFromConfig("SSL", "priv_key_path")
@@ -37,9 +31,9 @@ def MainApp():
         messenger_server_port = int(readFromConfig("connection", "messenger_server_port"))
         http_server_port = int(readFromConfig("connection", "http_server_port"))
     except:
-        Log("Init", "\033[37;41m").new_message("Fatal Error!\n"
-                                               "Failed to load certain values in the config.ini, be sure that EVERY "
-                                               "option has a valid value and try it again.")
+        logger.error("Fatal Error!\n"
+            "Failed to load certain values in the config.ini, be sure that EVERY \n"
+            "option has a valid value and try it again.")
         sys.exit(2)
 
     try:
