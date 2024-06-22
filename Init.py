@@ -1,7 +1,6 @@
 #! python3
 
 
-import stdin
 import sys
 import os
 import threading
@@ -13,13 +12,13 @@ from Database import *
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
 try:
     from twisted.internet import ssl, reactor
     from twisted.internet.protocol import Factory, Protocol
     from twisted.web.server import Site
     from OpenSSL import SSL
 
+    logger.warning("Starting nu-EAN, an EA Nation 1.0 server emulator...\n")
 
     def mainapp():
         try:
