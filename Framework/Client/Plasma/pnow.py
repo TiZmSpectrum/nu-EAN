@@ -1,7 +1,5 @@
-from Globals import globalServerStartID
-from Globals import globalServerGameIDGen
-#from Globals import globalServerLobbyIDGen
-from Globals import Clients
+from Globals import globalServerStartID, globalServerGameIDGen, Clients
+#, globalServerLobbyIDGen
 from Utilities.Packet import Packet
 from ConfigParser import ConfigParser
 
