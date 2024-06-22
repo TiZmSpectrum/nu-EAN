@@ -8,6 +8,8 @@ import threading
 import config
 import sqlite3
 import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 try:
@@ -126,5 +128,7 @@ try:
         Log("Init", "\033[37m").new_message("Finished initialization! Ready for receiving incoming connections...", 0)
 
         reactor.run()
-        if __name__ == '__main__':
-        MainApp()
+        
+finally:
+    if __name__ == '__main__':
+        mainapp()
