@@ -23,6 +23,7 @@ pyOpenSSL        | latest  | pip install pyOpenSSL
 cffi             | latest  | pip install cffi
 cryptography     | latest   | pip install cryptography
 service_identity | latest   | pip install service_identity
+configparser     | latest   | pip install configparser
 
 *...or just install everything via `pip install -r requirements.txt`*
 
