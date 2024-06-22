@@ -8,6 +8,8 @@ import threading
 import config
 import sqlite3
 import logging
+from Logger import *
+from Database import *
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
