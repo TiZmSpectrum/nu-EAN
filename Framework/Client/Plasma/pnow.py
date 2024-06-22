@@ -1,7 +1,7 @@
 from Globals import globalServerStartID, globalServerGameIDGen, Clients
 #, globalServerLobbyIDGen
 from Utilities.Packet import Packet
-from ConfigParser import ConfigParser
+from backports import configparser
 
 def HandleStatus(self, data): # TODO - figure out more of actual status calls
     toSend.set("PacketData", "TXN", "Status")
