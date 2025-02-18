@@ -13,7 +13,7 @@ from Config import readFromConfig
 from Database import Database
 from Utilities.Packet import Packet
 
-from urllib import quote
+from urllib3 import *
 
 db = Database()
 

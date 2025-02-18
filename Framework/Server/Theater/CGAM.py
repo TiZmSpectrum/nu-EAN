@@ -1,4 +1,4 @@
-from ConfigParser import ConfigParser
+from configparser import *
 
 from Utilities.Packet import Packet
 

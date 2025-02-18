@@ -1,6 +1,6 @@
 import os
 
-from backports import configparser
+import configparser
 
 configFile = configparser.ConfigParser()
 configFile.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'config.ini'))
